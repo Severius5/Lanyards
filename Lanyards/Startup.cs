@@ -18,23 +18,22 @@ namespace Lanyards
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.ConfigureAppAuthentication(_configuration);
 			services.AddControllersWithViews();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			if (env.IsDevelopment())
-			{
 				app.UseDeveloperExceptionPage();
-			}
 			else
-			{
 				app.UseExceptionHandler("/Home/Error");
-			}
+
 			app.UseStaticFiles();
 
 			app.UseRouting();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
