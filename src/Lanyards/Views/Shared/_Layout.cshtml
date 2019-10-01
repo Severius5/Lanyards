@@ -15,19 +15,27 @@
 	<header>
 		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
 			<div class="container">
-				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Lanyards</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-					<ul class="navbar-nav flex-grow-1">
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-						</li>
+				<a class="navbar-brand" asp-controller="Home" asp-action="Index">Lanyards</a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav ml-auto">
+						@if (!User.Identity.IsAuthenticated)
+						{
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-controller="Account" asp-action="Login">
+									<i class="fas fa-user"></i>
+								</a>
+							</li>
+						}
+
+						@if (User.IsAdmin())
+						{
+							<li class="nav-item">
+								<a class="nav-link text-success" asp-controller="Home" asp-action="Create">
+									<i class="fas fa-plus"></i> Create
+								</a>
+							</li>
+						}
 					</ul>
 				</div>
 			</div>
@@ -40,12 +48,6 @@
 		</main>
 	</div>
 
-	<footer class="border-top footer text-muted">
-		<div class="container">
-			&copy; 2019 - Lanyards - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
-		</div>
-	</footer>
-
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
 			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"
 			asp-fallback-src="~/lib/jquery/jquery.min.js" asp-fallback-test="window.jQuery"></script>
@@ -53,6 +55,8 @@
 			integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"
 			asp-fallback-src="~/lib/bootstrap/js/bootstrap.bundle.min.js"
 			asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"></script>
+	<script src="https://kit.fontawesome.com/2fe0aab140.js"
+			integrity="sha384-vZhmSm3kshNlxPsZGXVLs2e16t4pRD3QYhU12zwY088qFiim63A4g/VpqBVLxTpz" crossorigin="anonymous"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
 	@RenderSection("Scripts", required: false)
 </body>

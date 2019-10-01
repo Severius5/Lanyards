@@ -1,25 +1,42 @@
-﻿using Lanyards.Models;
+﻿using Lanyards.Core.Services;
+using Lanyards.DTO.Models;
+using Lanyards.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using X.PagedList;
 
 namespace Lanyards.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
+		private const int LanyardsPerPage = 6;
 
-		public HomeController(ILogger<HomeController> logger)
+		private readonly ILanyardsService _lanyardsService;
+
+		public HomeController(ILanyardsService lanyardsService)
 		{
-			_logger = logger;
+			_lanyardsService = lanyardsService ?? throw new ArgumentNullException(nameof(lanyardsService));
 		}
 
-		public IActionResult Index()
+		[HttpGet]
+		public async Task<IActionResult> Index(string filter, int page)
 		{
-			return View();
+			if (page < 1) page = 1;
+
+			ViewData["Filter"] = filter;
+
+			var results = await _lanyardsService.GetLanyards(filter, page, LanyardsPerPage);
+			var lanyardsVm = results.Lanyards.Select(ConvertToVM);
+			var viewModel = new StaticPagedList<LanyardViewModel>(lanyardsVm, page, LanyardsPerPage, results.Total);
+
+			return View(viewModel);
 		}
 
-		public IActionResult Privacy()
+		[HttpGet("create")]
+		public IActionResult Create()
 		{
 			return View();
 		}
@@ -28,6 +45,20 @@ namespace Lanyards.Controllers
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+
+		private LanyardViewModel ConvertToVM(Lanyard lanyard)
+		{
+			return new LanyardViewModel
+			{
+				BackImgUrl = lanyard.BackImgAddress,
+				CreationDate = lanyard.CreationDate,
+				Description = lanyard.Description,
+				FrontImgUrl = lanyard.FronImgAddress,
+				Id = lanyard.Id,
+				Text = lanyard.Text,
+				Type = (LanyardTypeViewModel)lanyard.Type
+			};
 		}
 	}
 }

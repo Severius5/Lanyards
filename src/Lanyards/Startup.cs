@@ -18,7 +18,8 @@ namespace Lanyards
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.ConfigureAppAuthentication(_configuration);
+			services.AddLanyards(_configuration);
+			services.ConfigureAppAuthentication(_configuration.GetSection("Auth"));
 			services.AddControllersWithViews();
 		}
 

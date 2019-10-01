@@ -1,9 +1,11 @@
-﻿namespace Lanyards.DTO.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Lanyards.Models
 {
 	/// <summary>
-	/// Type of lanyard
+	/// View model for Lanyard Type
 	/// </summary>
-	public enum LanyardType
+	public enum LanyardTypeViewModel
 	{
 		/// <summary>
 		/// Unknown
@@ -28,11 +30,13 @@
 		/// <summary>
 		/// Flate shoelace lanyard
 		/// </summary>
+		[Display(Name = "Flat shoelace")]
 		FlatShoelace = 20,
 
 		/// <summary>
 		/// Round shoelace lanyard
 		/// </summary>
+		[Display(Name = "Round shoelace")]
 		RoundShoelace = 21,
 
 		/// <summary>

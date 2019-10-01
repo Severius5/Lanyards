@@ -1,4 +1,40 @@
-﻿<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@model StaticPagedList<LanyardViewModel>
+
+<form asp-action="Index" method="get">
+	<div class="mb-4 row justify-content-center">
+		<div class="col col-6">
+			<div class="input-group">
+				<input name="filter" type="text" class="form-control" placeholder="Filter" aria-label="Filter" aria-describedby="button-search" />
+				<div class="input-group-append">
+					<button id="button-search" type="submit" class="btn btn-outline-info">Search</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+@if (!Model.Any())
+{
+	<p class="text-center">No results</p>
+}
+else
+{
+	foreach (var lanyard in Model)
+	{
+		<div class="row my-2">
+			<img src="@lanyard.FrontImgUrl" class="rounded img-fluid mx-auto" alt="@lanyard.Text" />
+		</div>
+	}
+
+	<div class="row mt-4 justify-content-center">
+		@Html.PagedListPager(Model, page => Url.Action("Index", new { page, filter = ViewData["Filter"] }),
+		new PagedListRenderOptions
+		{
+			LiElementClasses = new string[] { "page-item" },
+			PageClasses = new string[] { "page-link" }
+		})
+	</div>
+}

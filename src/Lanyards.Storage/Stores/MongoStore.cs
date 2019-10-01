@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Lanyards.Storage.Stores
@@ -54,22 +55,23 @@ namespace Lanyards.Storage.Stores
 			return entity.Id.ToString();
 		}
 
-		public async Task<(List<Lanyard> Lanyards, int TotalElements)> Paginate(string filter, int page, int pageSize)
+		public Task<(List<Lanyard> Lanyards, int TotalElements)> Paginate(string filter, int page, int pageSize)
 		{
 			var builder = Builders<MongoLanyard>.Filter;
 			var skip = (page - 1) * pageSize;
 
 			if (string.IsNullOrEmpty(filter))
 			{
-				return await Paginate(builder.Empty, skip, pageSize);
+				return Paginate(builder.Empty, skip, pageSize);
 			}
 			else
 			{
+				filter = Regex.Escape(filter);
 				var find = builder.Or(
 					builder.Regex(x => x.Text, $"/{filter}/i"),
 					builder.Regex(x => x.Description, $"/{filter}/i"));
 
-				return await Paginate(find, skip, pageSize);
+				return Paginate(find, skip, pageSize);
 			}
 		}
 

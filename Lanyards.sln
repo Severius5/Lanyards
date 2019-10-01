@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CDD7180F-B17
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lanyards.Storage", "src\Lanyards.Storage\Lanyards.Storage.csproj", "{A9950EA9-5E7C-4D26-A1C7-BF65F35003C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lanyards.Core", "src\Lanyards.Core\Lanyards.Core.csproj", "{C1E93E29-5BD5-4CD0-93BC-732FB3B41435}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{A9950EA9-5E7C-4D26-A1C7-BF65F35003C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9950EA9-5E7C-4D26-A1C7-BF65F35003C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9950EA9-5E7C-4D26-A1C7-BF65F35003C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1E93E29-5BD5-4CD0-93BC-732FB3B41435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1E93E29-5BD5-4CD0-93BC-732FB3B41435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1E93E29-5BD5-4CD0-93BC-732FB3B41435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1E93E29-5BD5-4CD0-93BC-732FB3B41435}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 		{7F5EA7C5-EEE2-48F2-99F2-2D409A6D4229} = {CDD7180F-B17D-48DB-B74A-0D1763C5AB1A}
 		{1147ACD9-2884-46ED-9767-8CA2650BF181} = {CDD7180F-B17D-48DB-B74A-0D1763C5AB1A}
 		{A9950EA9-5E7C-4D26-A1C7-BF65F35003C2} = {CDD7180F-B17D-48DB-B74A-0D1763C5AB1A}
+		{C1E93E29-5BD5-4CD0-93BC-732FB3B41435} = {CDD7180F-B17D-48DB-B74A-0D1763C5AB1A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AA15EE6B-FC39-4EC7-B523-808D55B6D0CB}
