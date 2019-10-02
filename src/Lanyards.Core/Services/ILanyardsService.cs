@@ -31,5 +31,26 @@ namespace Lanyards.Core.Services
 		/// <param name="pageSize">Elements per page</param>
 		/// <returns>Paginated lanyards</returns>
 		Task<(List<Lanyard> Lanyards, int Total)> GetLanyards(string filter, int page, int pageSize);
+
+		/// <summary>
+		/// Updates existing lanyard
+		/// </summary>
+		/// <param name="lanyard">Lanyard with updated values</param>
+		/// <returns>Whether update succeeded</returns>
+		Task<bool> UpdateLanyard(Lanyard lanyard);
+
+		/// <summary>
+		/// Deletes lanyard
+		/// </summary>
+		/// <param name="id">Lanyard's ID</param>
+		/// <returns><see cref="Task"/></returns>
+		Task DeleteLanyard(string id);
+
+		/// <summary>
+		/// Signs parameters for image upload
+		/// </summary>
+		/// <param name="parameters">Parameters to sign</param>
+		/// <returns>Hash</returns>
+		string SignImageUploadParameters(Dictionary<string, string> parameters);
 	}
 }

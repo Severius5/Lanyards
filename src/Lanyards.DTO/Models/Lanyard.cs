@@ -35,7 +35,7 @@ namespace Lanyards.DTO.Models
 		/// <summary>
 		/// Address of image for front/outer lanyard side 
 		/// </summary>
-		public string FronImgAddress { get; set; }
+		public string FrontImgAddress { get; set; }
 
 		/// <summary>
 		/// Address of image for back/inner lanyard side

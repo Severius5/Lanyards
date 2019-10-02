@@ -1,0 +1,49 @@
+﻿@model LanyardViewModel
+
+
+@if (User.IsAdmin())
+{
+	<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">Delete</button>
+
+	<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="confirmDeleteTitle">Confirm delete</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-inline-block">
+						<button type="submit" class="btn btn-danger">Delete</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+<h5 class="w-100 text-center">
+	@Html.DisplayFor(x => x.Text)
+</h5>
+
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+	<div class="w-100 text-center mt-2">
+		@Html.DisplayFor(x => x.Description)
+	</div>
+}
+
+<div class="row mt-3">
+	<img src="@Model.FrontImgUrl" class="rounded img-fluid mx-auto" alt="Front lanyard image" />
+</div>
+
+@if (Model.BackImgUrl != null)
+{
+	<div class="row mt-3">
+		<img src="@Model.BackImgUrl" class="rounded img-fluid mx-auto" alt="Back lanyard image" />
+	</div>
+}

@@ -31,5 +31,19 @@ namespace Lanyards.Storage.Stores
 		/// <param name="pageSize">How many elements per page</param>
 		/// <returns>Filtered result</returns>
 		Task<(List<Lanyard> Lanyards, int TotalElements)> Paginate(string filter, int page, int pageSize);
+
+		/// <summary>
+		/// Deletes lanyard
+		/// </summary>
+		/// <param name="id">Lanyard's ID</param>
+		/// <returns><see cref="Task"/></returns>
+		Task Delete(string id);
+
+		/// <summary>
+		/// Updates lanyard
+		/// </summary>
+		/// <param name="lanyard"><see cref="Lanyard"/> with updated fields</param>
+		/// <returns>Whether update succeeded</returns>
+		Task<bool> Update(Lanyard lanyard);
 	}
 }

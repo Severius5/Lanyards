@@ -41,18 +41,32 @@ namespace Lanyards.Storage.Stores
 
 		public async Task<string> Add(Lanyard lanyard)
 		{
-			var entity = new MongoLanyard
-			{
-				Description = lanyard.Description,
-				Text = lanyard.Text,
-				Type = lanyard.Type,
-				BackImgAddress = lanyard.BackImgAddress,
-				FronImgAddress = lanyard.FronImgAddress
-			};
+			var entity = MongoMapper.MapToEntity(lanyard, false);
 
 			await _collection.InsertOneAsync(entity);
 
 			return entity.Id.ToString();
+		}
+
+		public async Task Delete(string id)
+		{
+			if (!ObjectId.TryParse(id, out var objectId))
+				return;
+
+			await _collection.DeleteOneAsync(x => x.Id == objectId);
+		}
+
+		public async Task<bool> Update(Lanyard lanyard)
+		{
+			if (!ObjectId.TryParse(lanyard.Id, out var objectId))
+				return false;
+
+			var entity = MongoMapper.MapToEntity(lanyard);
+			var result = await _collection.ReplaceOneAsync(x => x.Id == objectId, entity);
+
+			return result.IsAcknowledged
+				&& result.IsModifiedCountAvailable
+				&& result.ModifiedCount > 0;
 		}
 
 		public Task<(List<Lanyard> Lanyards, int TotalElements)> Paginate(string filter, int page, int pageSize)

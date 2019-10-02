@@ -42,6 +42,7 @@ namespace Lanyards.Models
 		/// <summary>
 		/// Address of image for front/outer lanyard side 
 		/// </summary>
+		[Url]
 		[Required]
 		[Display(Name = "Front side image")]
 		public string FrontImgUrl { get; set; }
@@ -49,6 +50,7 @@ namespace Lanyards.Models
 		/// <summary>
 		/// Address of image for back/inner lanyard side
 		/// </summary>
+		[Url]
 		[Display(Name = "Back side image")]
 		public string BackImgUrl { get; set; }
 

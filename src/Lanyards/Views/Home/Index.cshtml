@@ -7,9 +7,9 @@
 	<div class="mb-4 row justify-content-center">
 		<div class="col col-6">
 			<div class="input-group">
-				<input name="filter" type="text" class="form-control" placeholder="Filter" aria-label="Filter" aria-describedby="button-search" />
+				<input name="filter" type="text" class="form-control" placeholder="Filter" aria-label="Filter" aria-describedby="btn-search" />
 				<div class="input-group-append">
-					<button id="button-search" type="submit" class="btn btn-outline-info">Search</button>
+					<button id="btn-search" type="submit" class="btn btn-outline-info">Search</button>
 				</div>
 			</div>
 		</div>
@@ -25,7 +25,9 @@ else
 	foreach (var lanyard in Model)
 	{
 		<div class="row my-2">
-			<img src="@lanyard.FrontImgUrl" class="rounded img-fluid mx-auto" alt="@lanyard.Text" />
+			<a asp-action="Details" asp-route-id="@lanyard.Id" class="mx-auto">
+				<img src="@lanyard.FrontImgUrl" class="rounded img-fluid" alt="@lanyard.Text" />
+			</a>
 		</div>
 	}
 

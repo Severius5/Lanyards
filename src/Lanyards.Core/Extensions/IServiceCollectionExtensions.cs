@@ -1,4 +1,5 @@
-﻿using Lanyards.Core.Services;
+﻿using Lanyards.Core.Options;
+using Lanyards.Core.Services;
 using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -19,6 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
 			services.AddAppStorage(configuration.GetSection("Storage"));
 
 			services.AddTransient<ILanyardsService, LanyardsService>();
+
+			services.Configure<CloudinaryOptions>(configuration.GetSection("Cloudinary"));
 
 			return services;
 		}

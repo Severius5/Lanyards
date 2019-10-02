@@ -28,7 +28,7 @@ namespace Lanyards
 			if (env.IsDevelopment())
 				app.UseDeveloperExceptionPage();
 			else
-				app.UseExceptionHandler("/Home/Error");
+				app.UseExceptionHandler("/error");
 
 			app.UseStaticFiles();
 

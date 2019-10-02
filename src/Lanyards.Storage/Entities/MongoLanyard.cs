@@ -47,11 +47,5 @@ namespace Lanyards.Storage.Entities
 		[BsonIgnoreIfNull]
 		[BsonElement("Back")]
 		public string BackImgAddress { get; set; }
-
-		/// <summary>
-		/// Temporary place for text match score used for sorting
-		/// </summary>
-		[BsonIgnoreIfNull]
-		public double? TextMatchScore { get; set; }
 	}
 }
